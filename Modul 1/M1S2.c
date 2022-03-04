@@ -38,12 +38,12 @@ void pqueue_push(PriorityQueue *pqueue, int value, int ID)
         return;
     }
 
-    if (value < pqueue->_top->data) {
+    if (value > pqueue->_top->data) {
         newNode->next = pqueue->_top;
         pqueue->_top = newNode;
     } else {
         while ( temp->next != NULL && 
-                temp->next->data < value)
+                temp->next->data > value)
             temp = temp->next;
         newNode->next = temp->next;
         temp->next = newNode;
@@ -81,7 +81,7 @@ int main() {
             scanf("%d %d", &ID, &value);
             pqueue_push(&myqueue, value, ID);
         } else {
-            if (pqueue_top(&myqueue) == 0) {
+            if (pqueue_isEmpty(&myqueue)) {
                 printf("HORE\n");
             } else {
                 printf("%d\n", pqueue_top(&myqueue));
