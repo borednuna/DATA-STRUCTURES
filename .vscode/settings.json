@@ -3,6 +3,7 @@
         "listlibrary.h": "c",
         "stdio.h": "c",
         "char_arrstack.h": "c",
-        "str_listqueue.h": "c"
+        "str_listqueue.h": "c",
+        "str_arrlib.h": "c"
     }
 }

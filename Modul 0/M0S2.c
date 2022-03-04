@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include "../Libraries/arrlibrary.h"
 
+void forEachElement (DynamicArray *myArray, void (*function)(int *data));
+void printElement(int element);
 void dArray_insertAt(DynamicArray *darray, unsigned index, int value);
 void dArray_removeAt(DynamicArray *darray, unsigned index);
 
@@ -16,25 +18,27 @@ int main() {
     dArray_pushBack(&myArray, 13);
 
     int index = 2, value = 99;
-    for (int i = 0; i < myArray._size; ++i) {
-        printf("%d ", myArray._arr[i]);
-    }
-    printf("\n\n");
+    forEachElement(&myArray, printElement);
+    printf("\n---\n");
 
     dArray_insertAt(&myArray, index, value);
 
-    for (int i = 0; i < myArray._size; ++i) {
-        printf("%d ", myArray._arr[i]);
-    }
+    forEachElement(&myArray, printElement);
     printf("\n---\n");
 
     dArray_removeAt(&myArray, index);
 
-    for (int i = 0; i < myArray._size; ++i) {
-        printf("%d ", myArray._arr[i]);
+    forEachElement(&myArray, printElement);
+}
+
+void forEachElement(DynamicArray *myArray, void (*function)(int *data)) {
+    for (int i=0; i < myArray->_size; i++) {
+        function(myArray->_arr[i]);
     }
-    printf("\n---\n");
-    // free(&myArray);
+}
+
+void printElement(int element) {
+    printf("%d ", element);
 }
 
 void dArray_insertAt(DynamicArray *darray, unsigned index, int value)

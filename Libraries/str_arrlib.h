@@ -38,25 +38,22 @@ bool darray_isEmpty(DynamicArray *darray) {
     return (darray->_size == 0);
 }
 
-void darray_pushBack(DynamicArray *darray, char *value)
+void dArray_pushBack(DynamicArray *darray, char* value)
 {
     if (darray->_size + 1 > darray->_capacity) {
         unsigned it;
         darray->_capacity *= 2;
-        char **newArr = (char **) malloc(sizeof(char *) * darray->_capacity);
+        char **newArr = (char**) malloc(sizeof(char*) * darray->_capacity);
 
-        for (it=0; it < darray->_size; ++it){
-            newArr[it] = (char *) malloc(sizeof(char) * (100+1));
+        for (it=0; it < darray->_size; ++it)
             strcpy(newArr[it], darray->_arr[it]);
-        }
-
-        char **oldarray = darray->_arr;
+        
+        char **oldArray = darray->_arr;
         darray->_arr = newArr;
-        free(oldarray);
-    } 
-    // masih ada yang kurang, mungkin bisa ditambahkkan
-    
+        free(oldArray);
+    }
     strcpy(darray->_arr[darray->_size++], value);
+    darray->_capacity += 1;
 }
 
 void darray_popBack(DynamicArray *darray) {
