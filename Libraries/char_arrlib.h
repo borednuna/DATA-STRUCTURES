@@ -16,7 +16,7 @@
 // Struktur ADT DynamicArray
 
 typedef struct dynamicarr_t {
-    int *_arr;
+    char *_arr;
     unsigned _size, _capacity;
 } DynamicArray;
 
@@ -37,24 +37,24 @@ void dArray_init(DynamicArray *darray)
 {
     darray->_capacity = 2u;
     darray->_size = 0u;
-    darray->_arr = (int*) malloc(sizeof(int) * 2);
+    darray->_arr = (char*) malloc(sizeof(char) * 2);
 }
 
 bool dArray_isEmpty(DynamicArray *darray) {
     return (darray->_size == 0);
 }
 
-void dArray_pushBack(DynamicArray *darray, int value)
+void dArray_pushBack(DynamicArray *darray, char value)
 {
     if (darray->_size + 1 > darray->_capacity) {
         unsigned it;
         darray->_capacity *= 2;
-        int *newArr = (int*) malloc(sizeof(int) * darray->_capacity);
+        char *newArr = (char*) malloc(sizeof(char) * darray->_capacity);
 
         for (it=0; it < darray->_size; ++it)
             newArr[it] = darray->_arr[it];
         
-        int *oldArray = darray->_arr;
+        char *oldArray = darray->_arr;
         darray->_arr = newArr;
         free(oldArray);
     }
@@ -66,20 +66,20 @@ void dArray_popBack(DynamicArray *darray) {
     else return;
 }
 
-int dArray_back(DynamicArray *darray) {
+char dArray_back(DynamicArray *darray) {
     if (!dArray_isEmpty(darray))
         return darray->_arr[darray->_size-1];
     else return 0;
 }
 
-int dArray_front(DynamicArray *darray) {
+char dArray_front(DynamicArray *darray) {
     if (!dArray_isEmpty(darray))
         return darray->_arr[0];
     else return 0;
 }
 
 void dArray_setAt(
-    DynamicArray *darray, unsigned index, int value)
+    DynamicArray *darray, unsigned index, char value)
 {
     if (!dArray_isEmpty(darray)) {
         if (index >= darray->_size)
@@ -89,7 +89,7 @@ void dArray_setAt(
     }
 }
 
-int dArray_getAt(DynamicArray *darray, unsigned index)
+char dArray_getAt(DynamicArray *darray, unsigned index)
 {
     if (!dArray_isEmpty(darray)) {
         if (index >= darray->_size)
