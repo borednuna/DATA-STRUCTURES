@@ -12,13 +12,13 @@ void multiply2(int *elem) {
     printElement(elem);
 }
 
-// void forEachElement (SinglyList *list, void (*function)(int *data)){
-//     SListNode *temp = list->_head;
-//     while(temp != NULL){
-//         function(&temp->data);
-//         temp = temp->next;
-//     }
-// }
+void forEachElement (SinglyList *list, void (*function)(int *data)){
+    SListNode *temp = list->_head;
+    while(temp != NULL){
+        function(&temp->data);
+        temp = temp->next;
+    }
+}
 
 void sumDigit(int *elem){
     int sum = 0, temp;

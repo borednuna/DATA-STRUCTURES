@@ -46,13 +46,13 @@ typedef struct slist_t {
 
 /* Function definition below */
 
-void forEachElement (SinglyList *list, void (*function)(int *data)){
-    SListNode *temp = list->_head;
-    while(temp != NULL){
-        function(&temp->data);
-        temp = temp->next;
-    }
-}
+// void forEachElement (SinglyList *list, void (*function)(int *data)){
+//     SListNode *temp = list->_head;
+//     while(temp != NULL){
+//         function(&temp->data);
+//         temp = temp->next;
+//     }
+// }
 
 void slist_init(SinglyList *list) 
 {
