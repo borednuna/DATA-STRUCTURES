@@ -1,3 +1,3 @@
-# FLYING OCTOPUS
+# DATA STRUCTURES
 
-A collection of codes in my data structure class. All codes are currently written in C. Why Flying Octopus ? Idk either
+A collection of codes in my data structure class. All codes are currently written in C.
