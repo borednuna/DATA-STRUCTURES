@@ -4,6 +4,8 @@
         "stdio.h": "c",
         "char_arrstack.h": "c",
         "str_listqueue.h": "c",
-        "str_arrlib.h": "c"
+        "str_arrlib.h": "c",
+        "arrlibrary.h": "c",
+        "arr_listpriorqueue.h": "c"
     }
 }
