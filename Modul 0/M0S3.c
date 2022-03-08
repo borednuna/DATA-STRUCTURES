@@ -36,5 +36,5 @@ int main() {
         darray_popBack(&myArray);
     }
 
-    printf("%s\n", darray_back(&myArray));
+    printf("%d\n", darray_isEmpty(&myArray));
 }

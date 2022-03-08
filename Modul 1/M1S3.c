@@ -10,17 +10,17 @@
 
 int main() {
     // Priority Queue
-    PriorityQueue mypqueue;
-    pqueue_init(&mypqueue);
+    // PriorityQueue mypqueue;
+    // pqueue_init(&mypqueue);
 
-    pqueue_push(&mypqueue, "TEST");
-    pqueue_push(&mypqueue, "CASE");
-    pqueue_push(&mypqueue, "STRUKTUR DATA");
+    // pqueue_push(&mypqueue, "TEST");
+    // pqueue_push(&mypqueue, "CASE");
+    // pqueue_push(&mypqueue, "STRUKTUR DATA");
 
-    while (!pqueue_isEmpty(&mypqueue)) {
-        printf("\n%s\n", pqueue_top(&mypqueue));
-        pqueue_pop(&mypqueue);
-    }
+    // while (!pqueue_isEmpty(&mypqueue)) {
+    //     printf("\n%s\n", pqueue_top(&mypqueue));
+    //     pqueue_pop(&mypqueue);
+    // }
 
     // list queue
     // Queue myList;
@@ -80,15 +80,15 @@ int main() {
     // }
 
     // Array Stack
-    // StackArray myArr;
-    // stackArray_init(&myArr, 10);
+    StackArray myArr;
+    stackArray_init(&myArr, 10);
 
-    // stackArray_push(&myArr, "TEST");
-    // stackArray_push(&myArr, "CASE");
-    // stackArray_push(&myArr, "STRUKTUR DATA");
+    stackArray_push(&myArr, "TEST");
+    stackArray_push(&myArr, "CASE");
+    stackArray_push(&myArr, "STRUKTUR DATA");
 
-    // while (!stackArray_isEmpty(&myArr)) {
-    //     printf("\n%s\n", stackArray_top(&myArr));
-    //     stackArray_pop(&myArr);
-    // }
+    while (!stackArray_isEmpty(&myArr)) {
+        printf("\n%s\n", stackArray_top(&myArr));
+        stackArray_pop(&myArr);
+    }
 }
