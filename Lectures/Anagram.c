@@ -3,12 +3,11 @@
 
 int main() {
     char str1[100], str2[100];
-    char alph[26] = {0};
+    int alph[26] = {0};
 
     int check = 1;
     printf("Kata 1: "); scanf("%s", str1);
     printf("Kata 2: "); scanf("%s", str2);
-    printf("%s %s\n", str1, str2);
 
     char *first, *sec;
     first = &str1[0];
@@ -19,8 +18,8 @@ int main() {
     }
 
     while (*first != '\0' && *sec != '\0') {
-        alph[*first - 'a']++;
-        alph[*sec - 'a']--;
+        alph[(int)(*first - 'a')]++;
+        alph[(int)(*sec - 'a')]--;
         first++; sec++;
     }
 

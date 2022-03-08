@@ -6,12 +6,12 @@ void main() {
     char *start, *end;
     int check = 1;
 
-    scanf("%s", str);
+    scanf("%[^\n]s", str);
     start = &str[0];
     end = &str[strlen(str)-1];
 
     while (*start != *end) {
-        if (toupper(start) != toupper(end)) {
+        if (toupper(*start) != toupper(*end)) {
             check = 0;
             break;
         }
