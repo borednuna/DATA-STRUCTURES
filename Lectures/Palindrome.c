@@ -10,7 +10,7 @@ void main() {
     start = &str[0];
     end = &str[strlen(str)-1];
 
-    while (*start != *end) {
+    while (start != end) {
         if (toupper(*start) != toupper(*end)) {
             check = 0;
             break;
