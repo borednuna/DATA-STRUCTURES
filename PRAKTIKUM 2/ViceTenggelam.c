@@ -29,14 +29,17 @@ BSTNode* __bst__createNode(int value) {
     return newNode;
 }
 
-BSTNode* __bst__insert(BSTNode *root, int value) {
-    if (root == NULL) 
+BSTNode* __bst__insert(BSTNode *root, int value, int* depth) {
+    if (root == NULL) {
         return __bst__createNode(value);
+    }
 
-    if (value < root->key)
-        root->left = __bst__insert(root->left, value);
-    else if (value > root->key)
-        root->right = __bst__insert(root->right, value);
+    *depth = *depth + 1;
+    if (value < root->key) {
+        root->left = __bst__insert(root->left, value, depth);
+    } else if (value > root->key) {
+        root->right = __bst__insert(root->right, value, depth);
+    }
     
     return root;
 }
@@ -138,9 +141,10 @@ bool bst_find(BST *bst, int value) {
         return false;
 }
 
-void bst_insert(BST *bst, int value) {
+void bst_insert(BST *bst, int value, int* depth) {
+    *depth = 0;
     if (!bst_find(bst, value)) {
-        bst->_root = __bst__insert(bst->_root, value);
+        bst->_root = __bst__insert(bst->_root, value, depth);
         bst->_size++;
     }
 }
@@ -171,6 +175,35 @@ void bst_preorder(BST *bst) {
     __bst__preorder(bst->_root);
 }
 
-int main() {
+int checkdepth(int* first, int* sec, int depth) {
+    if (depth > *first)
+        *first = depth;
+    else if (depth > *sec)
+        *sec = depth;
     
+    return (*first + *sec);
+}
+
+int main() {
+    int query, temp, depth, first = 0, sec = 0;
+    bool ftemp = true;
+    BST land;
+    bst_init(&land);
+
+    scanf("%d", &query);
+
+    for (int i=0; i < query; i++) {
+        scanf("%d", &temp);
+        bst_insert(&land, temp, &depth);
+        int takotkah = checkdepth(&first, &sec, depth);
+
+        if (ftemp) {
+            printf("Mulai!\n");
+            ftemp = false;
+        } else if (takotkah % 2 == 0) {
+            printf("IKKI!!! :(\n");
+        } else {
+            printf("%d\n", takotkah);
+        }
+    }
 }
