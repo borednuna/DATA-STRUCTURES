@@ -30,20 +30,20 @@ void insertItem(long long key, long long value) {
     long long index = getHashIndex(key);
     long long i = index;
 
-    struct item *newItem = (struct item*) malloc(sizeof(struct item));
+    struct item* newItem = (struct item*) malloc(sizeof(struct item));
     newItem->key = key;
     newItem->value = value;
 
     while(array[i].flag == 1) {
         if (array[i].data->key == key) {
             array[i].data->value = value;
-            printf("Data telah di-update.\n");
+            printf("Data telah di-update.\n\n");
             return;
         }
 
         i = (i + 1) % max;
         if (i == index) {
-            printf("Hash table penuh.\n");
+            printf("Hash table penuh.\n\n");
             return;
         }
     }
@@ -51,7 +51,7 @@ void insertItem(long long key, long long value) {
     array[i].flag = 1;
     array[i].data = newItem;
     size++;
-    printf("Key %d telah ditambahkan\n", key);
+    printf("Key %d telah ditambahkan\n\n", key);
 }
 
 void removeItem(long long key) {
@@ -63,7 +63,7 @@ void removeItem(long long key) {
             array[i].flag = 2;
             array[i].data = NULL;
             size--;
-            printf("Data key %d telah dihapus\n", key);
+            printf("Data key %d telah dihapus\n\n", key);
             return;
         }
 
@@ -72,7 +72,7 @@ void removeItem(long long key) {
             break;
         }
     }
-    printf("Data key %d tidak ditemukan.\n");
+    printf("Data key %d tidak ditemukan.\n\n", key);
 }
 
 void searchItem(long long key) {
@@ -81,7 +81,7 @@ void searchItem(long long key) {
 
     while (array[i].flag != 0) {
         if (array[i].flag == 1 && array[i].data->key) {
-            printf("Data key %d ada pada index %d\n", key, i);
+            printf("Data key %d ada pada index %d\n\n", key, i);
             return;
         }
 
@@ -90,7 +90,7 @@ void searchItem(long long key) {
             break;
         }
     }
-    printf("Data key %d tidak ditemukan.\n");
+    printf("Data key %d tidak ditemukan.\n\n", key);
 }
 
 void displayHashTable() {
@@ -98,23 +98,22 @@ void displayHashTable() {
         printf("Hash Table kosong.\n");
     } else {
         for (long long i = 0; i < max; i++) {
-            struct item *current = (struct item*)array[i].data;
-
-            if (current == NULL) {
+            if (array[i].data == NULL) {
                 printf("Indeks array ke-%d tidak memiliki item.\n", i);
             } else {
-                printf("Indeks array ke-%d memiliki key %d dan value %d.\n", i, current->key, current->value);
+                printf("Indeks array ke-%d memiliki key %d dan value %d.\n", i, array[i].data->key, array[i].data->value);
             }
         }
     }
+    printf("\n");
 }
 
 int main() {
-    array = (struct hashTableItem*) malloc(max * sizeof(struct hashTableItem*));
+    array = (struct hashTableItem*) malloc(max * sizeof(struct hashTableItem));
     initArray();
-
-    // displayHashTable();
-    insertItem(5025211051, 18);
-
+    insertItem(11051, 2002);
+    displayHashTable();
+    searchItem(11051);
+    removeItem(11051);
     displayHashTable();
 }
