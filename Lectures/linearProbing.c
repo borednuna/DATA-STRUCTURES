@@ -114,6 +114,8 @@ int main() {
     insertItem(11051, 2002);
     displayHashTable();
     searchItem(11051);
+    searchItem(11059);
     removeItem(11051);
+    removeItem(11055);
     displayHashTable();
 }
