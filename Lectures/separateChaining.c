@@ -143,8 +143,39 @@ void removeData(int key) {
             } else {
                 temp->next = temp->next->next;
             }
+        }
+    }
+}
 
-            printf("Key %d berhasil dihapus.\n\n", key);
+void findData(int key) {
+    int index = hashIndex(key);
+    struct node *list = (struct node*) array[index].head;
+
+    if (list == NULL) {
+        printf("Key %d tidak ditemukan.\n\n", key);
+    } else {
+        int findInd = findKey(list, key);
+
+        if (findInd == -1) {
+            printf("Key %d tidak ditemukan.\n\n", key);
+        } else {
+            struct node *temp = list;
+
+            if (temp->key == key) {
+                printf("Key %d ada di array indeks %d.\n\n", key, index);
+                return;
+            }
+
+            while (temp->next->key != key) {
+                temp = temp->next;
+            }
+
+            if (array[index].tail == temp->next) {
+                temp->next = NULL;
+                array[index].tail = temp;
+            } else {
+                temp->next = temp->next->next;
+            }
         }
     }
 }
@@ -182,5 +213,7 @@ int main() {
     displayHashtable();
     removeData(17);
     removeData(10);
+    findData(5);
+    findData(8);
     displayHashtable();
 }
