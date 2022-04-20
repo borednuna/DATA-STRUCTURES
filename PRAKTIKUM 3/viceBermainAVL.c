@@ -225,7 +225,50 @@ void preorder(AVLNode *root) {
     }
 }
 
-int main(){
+int predecessorValue(AVLNode *_root, int value) {
+    int pre = 0;
+    while (_root->data != 0) {
+        if (value < _root->data) {
+            pre = _root->data;
+            _root = _root->left;
+        } else if (value > _root->data) {
+            pre = _root->data;
+            _root = _root->right;
+        } else {
+            return pre;
+        }
+    }
+    return 0;
+}
+
+void bst_predecessor(AVL *bst, int value) {
+    printf("%d\n", value);
+    for (int i = 0; i < 2; i++) {
+        int temp = predecessorValue(bst->_root, value);
+        if (temp != 0) {
+            printf("%d\n", temp);
+            value = temp;
+        }
+    }
+}
+
+void __bst__preorder(AVLNode *_root) {
+    if (_root) {
+        printf("%d", _root->data);
+        if (_root->left != NULL)
+            printf(":");
+        __bst__preorder(_root->left);
+        if (_root->right != NULL)
+            printf(":");
+        __bst__preorder(_root->right);
+    }
+}
+
+void bst_preorder(AVL *bst) {
+    __bst__preorder(bst->_root);
+}
+
+int main() {
     AVL avltree;
     avl_init(&avltree);
 
@@ -241,10 +284,12 @@ int main(){
         } else {
             scanf("%s", order);
             if (strcmp(order, "requiem") == 0) {
-                scanf("%s", &buff);
-                // traverse parent
+                scanf("%d", &buff);
+                printf("requiem:\n");
+                bst_predecessor(&avltree, buff);
             } else {
-                // traverse output
+                printf("list:\n");
+                bst_preorder(&avltree);
                 end = true;
             }
         }

@@ -209,23 +209,54 @@ void avl_insert(AVL *avl,int value){
 
 }
 
-void avl_remove(AVL *avl,int value){
-    if(avl_find(avl,value)){
-        avl->_root=_remove_AVL(avl->_root,value);
-        avl->_size--;
-    }
+int temp;
+int tempTotal;
 
+void findMinMax(AVLNode *_root, int *min, int *max, int hd) {
+    if (_root == NULL)
+        return;
+
+    if (hd < *min)
+        *min = hd;
+    else if (hd > *max)
+        *max = hd;
+    
+    findMinMax(_root->left, min, max, hd-1);
+    findMinMax(_root->right, min, max, hd+1);
 }
 
-void preorder(AVLNode *root) {
-    if (root) {
-        preorder(root->left);
-        printf("%d ", root->data);
-        preorder(root->right);
+void printVerLine(AVLNode *_root, int lineNo, int hd) {
+    if (_root == NULL) {
+        return;
     }
+
+    if (hd == lineNo) {
+        temp = temp + _root->data;
+    }
+
+    printVerLine(_root->left, lineNo, hd-1);
+    printVerLine(_root->right, lineNo, hd+1);
 }
 
-int main(){
+void verticalOrder(AVLNode *_root) {
+    tempTotal = 0;
+    int min = 0, max = 0;
+    findMinMax(_root, &min, &max, 0);
+
+    for (int lineNo = min; lineNo <= max; lineNo++) {
+        temp = 0;
+        printVerLine(_root, lineNo, 0);
+        temp = temp * temp;
+        tempTotal = tempTotal + temp;
+    }
+    printf("%d\n", tempTotal);
+}
+
+void verticalAVL(AVL *avl) {
+    verticalOrder(avl->_root);
+}
+
+int main() {
     AVL avltree;
     avl_init(&avltree);
 
@@ -239,8 +270,8 @@ int main(){
             scanf("%d", &buff);
             avl_insert(&avltree, buff);
         } else {
+            verticalAVL(&avltree);
             end = true;
-            // hitung kolom dan dijumlah
         }
     }
 }

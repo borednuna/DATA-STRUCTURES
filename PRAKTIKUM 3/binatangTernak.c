@@ -209,66 +209,79 @@ void avl_insert(AVL *avl,int value){
 
 }
 
-int temp;
-int tempTotal;
-
-void findMinMax(AVLNode *_root, int *min, int *max, int hd) {
-    if (_root == NULL)
-        return;
-
-    if (hd < *min)
-        *min = hd;
-    else if (hd > *max)
-        *max = hd;
-    
-    findMinMax(_root->left, min, max, hd-1);
-    findMinMax(_root->right, min, max, hd+1);
-}
-
-void printVerLine(AVLNode *_root, int lineNo, int hd) {
-    if (_root == NULL) {
-        return;
+void avl_remove(AVL *avl,int value){
+    if(avl_find(avl,value)){
+        avl->_root=_remove_AVL(avl->_root,value);
+        avl->_size--;
     }
 
-    if (hd == lineNo) {
-        temp = temp + _root->data;
-    }
-
-    printVerLine(_root->left, lineNo, hd-1);
-    printVerLine(_root->right, lineNo, hd+1);
 }
 
-void verticalOrder(AVLNode *_root) {
-    int min = 0, max = 0;
-    findMinMax(_root, &min, &max, 0);
-
-    for (int lineNo = min; lineNo <= max; lineNo++) {
-        temp = 0;
-        printVerLine(_root, lineNo, 0);
-        printf("%d ", temp);
+void preorder(AVLNode *root) {
+    if (root) {
+        preorder(root->left);
+        printf("%d ", root->data);
+        preorder(root->right);
     }
 }
 
-void verticalAVL(AVL *avl) {
-    verticalOrder(avl->_root);
+int predecessorValue(AVLNode *_root, int value) {
+    int pre = 0;
+    while (_root->data != 0) {
+        if (value < _root->data) {
+            pre = _root->data;
+            _root = _root->left;
+        } else if (value > _root->data) {
+            pre = _root->data;
+            _root = _root->right;
+        } else {
+            return pre;
+        }
+    }
+    return 0;
 }
 
-int main(){
+void bst_predecessor(AVL *bst, int value) {
+    printf("%d\n", value);
+    for (int i = 0; i < 2; i++) {
+        int temp = predecessorValue(bst->_root, value);
+        if (temp != 0) {
+            printf("%d\n", temp);
+            value = temp;
+        }
+    }
+}
+
+void __bst__preorder(AVLNode *_root) {
+    if (_root) {
+        printf("%d", _root->data);
+        if (_root->left != NULL)
+            printf(":");
+        __bst__preorder(_root->left);
+        if (_root->right != NULL)
+            printf(":");
+        __bst__preorder(_root->right);
+    }
+}
+
+void bst_preorder(AVL *bst) {
+    __bst__preorder(bst->_root);
+}
+
+int main() {
     AVL avltree;
     avl_init(&avltree);
 
-    char order[100];
-    int buff, N;
-    
-    scanf("%d", &N);
-    for (int i = 0; i < N; i++) {
-        scanf("%s", order);
-        if (strcmp(order, "add") == 0) {
-            scanf("%d", &buff);
-            avl_insert(&avltree, buff);
-        } else {
-            verticalAVL(&avltree);
-            printf("\n");
-        }
+    int nodes, testCase, buff;
+    scanf("%d %d", nodes, testCase);
+
+    for (int i = 0; i < nodes; i++) {
+        scanf("%d", &buff);
+        avl_insert(&avltree, buff);
+    }
+
+    for (int i = 0; i < testCase; i++) {
+        scanf("%d", &buff);
+        // operation
     }
 }
