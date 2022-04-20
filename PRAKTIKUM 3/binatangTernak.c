@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 typedef struct AVLNode_t
 {
@@ -225,33 +226,6 @@ void preorder(AVLNode *root) {
     }
 }
 
-int predecessorValue(AVLNode *_root, int value) {
-    int pre = 0;
-    while (_root->data != 0) {
-        if (value < _root->data) {
-            pre = _root->data;
-            _root = _root->left;
-        } else if (value > _root->data) {
-            pre = _root->data;
-            _root = _root->right;
-        } else {
-            return pre;
-        }
-    }
-    return 0;
-}
-
-void bst_predecessor(AVL *bst, int value) {
-    printf("%d\n", value);
-    for (int i = 0; i < 2; i++) {
-        int temp = predecessorValue(bst->_root, value);
-        if (temp != 0) {
-            printf("%d\n", temp);
-            value = temp;
-        }
-    }
-}
-
 void __bst__preorder(AVLNode *_root) {
     if (_root) {
         printf("%d", _root->data);
@@ -268,12 +242,82 @@ void bst_preorder(AVL *bst) {
     __bst__preorder(bst->_root);
 }
 
+int predecessorValue(AVLNode *_root, int value) {
+    int pre = value;
+    while (_root != NULL) {
+        if (value < _root->data) {
+            pre = _root->data;
+            _root = _root->left;
+        } else if (value > _root->data) {
+            pre = _root->data;
+            _root = _root->right;
+        } else {
+            return pre;
+        }
+    }
+    return value;
+}
+
+int bst_predecessor(AVL *bst, int value) {
+    int temp = predecessorValue(bst->_root, value);
+    return temp;
+}
+
+int __findSib(AVLNode *_root, int value) {
+    if (_root->data == value || _root == NULL)
+        return 0;
+
+    int tempLeft;
+    int tempRight;
+
+    while (_root->left != NULL) {
+        if (_root->left == NULL) {
+            tempLeft = 0;
+        } else {
+            tempLeft = _root->left->data;
+        }
+
+        if (_root->right == NULL) {
+            tempRight = 0;
+        } else {
+            tempRight = _root->right->data;
+        }
+
+        if (tempLeft == value) {
+            return tempRight;
+        }
+
+        if (tempRight == value) {
+            return tempLeft;
+        }
+
+        if (value < _root->data) {
+            _root = _root->left;
+        } else {
+            _root = _root->right;
+        }
+    }
+    return 0;
+}
+
+int findSibling(AVL *avl, int value) {
+    int temp = __findSib(avl->_root, value);
+    return temp;
+}
+
+bool checkRoot(AVL *avl, int value) {
+    if (avl->_root->data == value)
+        return true;
+    else
+        return false;
+}
+
 int main() {
     AVL avltree;
     avl_init(&avltree);
 
     int nodes, testCase, buff;
-    scanf("%d %d", nodes, testCase);
+    scanf("%d %d", &nodes, &testCase);
 
     for (int i = 0; i < nodes; i++) {
         scanf("%d", &buff);
@@ -282,6 +326,13 @@ int main() {
 
     for (int i = 0; i < testCase; i++) {
         scanf("%d", &buff);
-        // operation
+        int parent = bst_predecessor(&avltree, buff);
+        int sibling = findSibling(&avltree, parent);
+        int result = abs(parent - sibling);
+
+        if (checkRoot(&avltree, buff))
+            result = 0;
+        
+        printf("%d\n", result);
     }
 }
