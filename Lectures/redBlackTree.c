@@ -242,15 +242,15 @@ void removeData(struct rbtNode **root, int data) {
 
 int main() {
     struct rbtNode *root = NULL;
-    insert(&root,20);
-    insert(&root,40);
-    insert(&root,50);
-    insert(&root,35);
-    insert(&root,25);
-    insert(&root,37);
-    printf("inorder Traversal Is : \n");
-    inorder(root);
-    findData(root, 35);
-    findData(root, 23);
-    removeData(&root, 40);
+    insert(&root,1);
+    insert(&root,2);
+    insert(&root,3);
+    insert(&root,4);
+    insert(&root,5);
+    insert(&root,6);
+    insert(&root,7);
+    insert(&root,8);
+    insert(&root,9);
+    insert(&root,10);
+    findData(root, 10);
 }

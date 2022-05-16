@@ -166,22 +166,15 @@ void preOrder(struct AVLNode *node) {
 
 int main() {
     struct AVLNode *node = NULL;
-    node = insertData(node, 27);
+    node = insertData(node, 1);
+    node = insertData(node, 2);
+    node = insertData(node, 3);
+    node = insertData(node, 4);
+    node = insertData(node, 5);
+    node = insertData(node, 6);
+    node = insertData(node, 7);
+    node = insertData(node, 8);
     node = insertData(node, 9);
-    node = insertData(node, 19);
-    node = insertData(node, 91);
-    node = insertData(node, 90);
-    node = insertData(node, 72);
-    printf("AVL tree node dengan urutan preorder : \n");
-    preOrder(node);
-    printf("\n");
-
-    findNode(node, 90);
-    findNode(node, 2);
-
-    node = removeNode(node, 9);
-    node = removeNode(node, 72);
-    printf("AVL tree node dengan urutan preorder setelah penghapusan: \n");
-    preOrder(node);
-    printf("\n");
+    node = insertData(node, 10);
+    findNode(node, 10);
 }
