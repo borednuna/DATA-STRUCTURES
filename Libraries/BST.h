@@ -52,7 +52,7 @@ BSTNode* __bst__insert(BSTNode *root, int value) {
         root->left = __bst__insert(root->left, value);
     else if (value > root->key)
         root->right = __bst__insert(root->right, value);
-    
+
     return root;
 }
 
