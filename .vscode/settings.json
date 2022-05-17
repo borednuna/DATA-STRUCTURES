@@ -5,6 +5,7 @@
         "char_arrstack.h": "c",
         "str_listqueue.h": "c",
         "str_arrlib.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "array": "cpp"
     }
 }
