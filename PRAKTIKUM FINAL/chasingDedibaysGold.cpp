@@ -1,7 +1,7 @@
-#include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+#include <string.h>
 
 using namespace std;
 
@@ -210,10 +210,10 @@ public:
     int findmod(int value) {
         AVLNode *temp = _search(_root, value);
         if (temp == NULL)
-            return false;
+            return -1;
         
         if (temp->data == value) return _getHeight(temp);
-        else return false;
+        else return -1;
     }
 
     void insert(int value) {
@@ -239,22 +239,22 @@ int main() {
     AVL structure;
     structure.init();
     int order, temp;
-    string buff;
+    char buff[20];
 
-    cin >> order;
+    scanf("%d", &order);
 
     for (int i = 0; i < order; i++) {
-        cin >> buff >> temp;
-        if (buff == "room") {
+        scanf("%s %d", buff, &temp);
+        if (strcmp("room", buff) == 0) {
             structure.insert(temp);
-        } else if (buff == "gold") {
-            if (!structure.find(temp)) {
-                cout << "Gold not found" << endl;
+        } else if (strcmp("gold", buff) == 0) {
+            if (structure.findmod(temp) == -1) {
+                printf("Gold not found\n");
             } else {
-                cout << "The gold at " << structure.findmod(temp) << " floor" << endl;
+                printf("The gold at %d floor\n", structure.findmod(temp));
             }
         } else {
-            cout << "Sorry, I don't understand ninuninu" << endl;
+            printf("Sorry, I don't understand ninuninu\n");
         }
     }
 }
